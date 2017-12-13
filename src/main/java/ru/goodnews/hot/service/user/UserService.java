@@ -10,4 +10,6 @@ public interface UserService {
 
     User get(int id) throws NotFoundException;
 
+    String hello();
+
 }

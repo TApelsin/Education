@@ -9,8 +9,12 @@ import ru.goodnews.hot.util.exception.NotFoundException;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository repository;
+
+    @Autowired
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public User save(User user) {
@@ -25,5 +29,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(int id) throws NotFoundException {
         return null;
+    }
+
+    public String hello() {
+        return "Hello, World!";
     }
 }
