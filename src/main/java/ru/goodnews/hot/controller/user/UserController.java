@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ru.goodnews.hot.model.User;
 import ru.goodnews.hot.service.user.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller // or @RestController
 public class UserController {
 
@@ -22,8 +25,20 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String printHello() {
-        //userService.save(new User("John"));
-        //userService.
-        return "Hello, World!"; //userService.hello();
+        // Filling
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            user.setFirstName(i % 2 == 0 ? "Tom" : "Kate");
+            userService.save(user);
+        }
+
+
+
+
+
+  //      user.setFirstName("John");
+
+     //   return user.toString(); //user.toString(); //userService.hello();
     }
 }

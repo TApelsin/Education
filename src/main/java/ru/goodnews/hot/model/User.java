@@ -9,7 +9,7 @@ import java.io.Serializable;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name="user")
+@Table(name="client")
 public class User implements Serializable {
  //   private static final long serialVersionUID = -8706689714326132798L;
 
@@ -18,6 +18,7 @@ public class User implements Serializable {
 //    public User(String firstName) {
 //        this.firstName = firstName;
 //    }
+
 
     private Long id;
     private String firstName;
@@ -41,6 +42,14 @@ public class User implements Serializable {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                '}';
     }
 }
 

@@ -9,17 +9,18 @@ import ru.goodnews.hot.util.exception.NotFoundException;
 @Service
 public class UserServiceImpl implements UserService {
 
+
     private UserRepository repository;
 
     @Autowired
     public void setRepository(UserRepository repository) {
         this.repository = repository;
     }
-
     @Override
     public User save(User user) {
-        //return repository.save(user);
-        return null;
+
+        System.out.println(user.toString());
+        return repository.save(user);
     }
 
     @Override

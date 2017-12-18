@@ -1,7 +1,9 @@
 package ru.goodnews.hot.service.user;
 
+import org.springframework.stereotype.Service;
 import ru.goodnews.hot.model.User;
 import ru.goodnews.hot.util.exception.NotFoundException;
+
 
 public interface UserService {
     User save(User user);
