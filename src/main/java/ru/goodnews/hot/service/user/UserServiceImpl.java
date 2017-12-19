@@ -6,9 +6,11 @@ import ru.goodnews.hot.model.User;
 import ru.goodnews.hot.repository.UserRepository;
 import ru.goodnews.hot.util.exception.NotFoundException;
 
+import java.util.List;
+
+// Зашита бизнес логика
 @Service
 public class UserServiceImpl implements UserService {
-
 
     private UserRepository repository;
 
@@ -16,10 +18,9 @@ public class UserServiceImpl implements UserService {
     public void setRepository(UserRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public User save(User user) {
-
-        System.out.println(user.toString());
         return repository.save(user);
     }
 
@@ -33,7 +34,12 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public String hello() {
-        return "Hello, World!";
+    public int countDataSets(String firstName) {
+        return findByFirstName(firstName).size();
+    }
+
+    @Override
+    public List<User> findByFirstName(String firstName) {
+        return repository.findByFirstName(firstName);
     }
 }

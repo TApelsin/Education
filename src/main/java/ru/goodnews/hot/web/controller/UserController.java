@@ -1,4 +1,4 @@
-package ru.goodnews.hot.controller.user;
+package ru.goodnews.hot.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,8 @@ public class UserController {
         this.userService = userService;
     }
 
+    // Примитивное заполнение данными
+    // По запросу /hello возвращает строку
     @ResponseBody
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String printHello() {
@@ -32,13 +34,14 @@ public class UserController {
             user.setFirstName(i % 2 == 0 ? "Tom" : "Kate");
             userService.save(user);
         }
+        return "Super good";
+    }
 
-
-
-
-
-  //      user.setFirstName("John");
-
-     //   return user.toString(); //user.toString(); //userService.hello();
+    // Проверка, что в базе что-то есть
+    // По запросу /getqty возвращает кол-во строк с задданым полем
+    @ResponseBody
+    @RequestMapping(value = "/getqty", method = RequestMethod.GET)
+    public int getUsersByName() {
+        return userService.countDataSets("Tom");
     }
 }

@@ -29,27 +29,14 @@ import java.util.Properties;
 
 
 @Configuration
-@EnableWebMvc
-@ComponentScan("ru.goodnews.hot")
 @EnableJpaRepositories("ru.goodnews.hot.repository")
 @EnableTransactionManagement
 public class DatabaseConfig extends WebMvcConfigurerAdapter {
 
-    //
-//    @Bean
-////    public DriverManagerDataSource getDataSource() {
-////        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-////        dataSource.setDriverClassName("org.postgresql.Driver");
-////        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-////        dataSource.setUsername("postgres");
-////        dataSource.setPassword("Baza");
-////        return dataSource;
-////    }
     @Bean
     DataSource dataSource() {
-        DriverManagerDataSource ds = new DriverManagerDataSource(); //new SimpleDriverDataSource();
+        DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("org.postgresql.Driver");
-        //ds.setDriver(new org.postgresql.Driver());
         ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
         ds.setUsername("postgres");
         ds.setPassword("Baza");
@@ -80,11 +67,7 @@ public class DatabaseConfig extends WebMvcConfigurerAdapter {
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
 
-//        jpaProperties.put("hibernate.ejb.naming_strategy",
-//                "org.hibernate.cfg.ImprovedNamingStrategy"
-//        );
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
-
 
         return entityManagerFactoryBean;
     }
