@@ -13,9 +13,9 @@ public interface UserService {
 
     User save(User user);
 
-    void delete(int id) throws NotFoundException;
+    void delete(Long id) throws NotFoundException;
 
-    User get(int id) throws NotFoundException;
+    User findOne(Long id) throws NotFoundException;
 
     int countDataSets(String firstName);
 

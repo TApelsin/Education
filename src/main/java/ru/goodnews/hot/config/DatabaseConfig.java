@@ -1,13 +1,11 @@
 package ru.goodnews.hot.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.omg.CORBA.Environment;
-import org.postgresql.jdbc2.optional.SimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -31,15 +29,19 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories("ru.goodnews.hot.repository")
 @EnableTransactionManagement
+@PropertySource(value = { "classpath:database.properties" })
 public class DatabaseConfig extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    private Environment environment;
 
     @Bean
     DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("org.postgresql.Driver");
-        ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
-        ds.setUsername("postgres");
-        ds.setPassword("Baza");
+        ds.setUrl(environment.getRequiredProperty("spring.datasource.url"));
+        ds.setDriverClassName(environment.getRequiredProperty("spring.datasource.driverClassName"));
+        ds.setUsername(environment.getRequiredProperty("spring.datasource.username"));
+        ds.setPassword(environment.getRequiredProperty("spring.datasource.password"));
         return ds;
     }
 
@@ -62,10 +64,10 @@ public class DatabaseConfig extends WebMvcConfigurerAdapter {
 
         Properties jpaProperties = new Properties();
 
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        jpaProperties.put("hibernate.hbm2ddl.auto", "create");
-        jpaProperties.put("hibernate.show_sql", "true");
-        jpaProperties.put("hibernate.format_sql", "true");
+        jpaProperties.put("hibernate.dialect", environment.getRequiredProperty("spring.jpa.hibernate.dialect"));
+        jpaProperties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("spring.jpa.hibernate.hbm2ddl.auto"));
+        jpaProperties.put("hibernate.show_sql", environment.getRequiredProperty("spring.jpa.hibernate.show_sql"));
+        jpaProperties.put("hibernate.format_sql", environment.getRequiredProperty("spring.jpa.hibernate.format_sql"));
 
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
 

@@ -1,16 +1,21 @@
-package ru.goodnews.hot.web;
+package ru.goodnews.hot.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.goodnews.hot.config.AppConfig;
 import ru.goodnews.hot.config.DatabaseConfig;
 
-public class Servlet implements WebApplicationInitializer {
+
+@Configuration
+@EnableWebMvc
+public class WebAppConfig implements WebApplicationInitializer {
 
     public void onStartup(ServletContext container) throws ServletException {
 

@@ -25,16 +25,16 @@ public class UserController {
     // Примитивное заполнение данными
     // По запросу /hello возвращает строку
     @ResponseBody
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @RequestMapping(value = "/addusers", method = RequestMethod.GET)
     public String printHello() {
         // Filling
-        List<User> users = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            User user = new User();
-            user.setFirstName(i % 2 == 0 ? "Tom" : "Kate");
-            userService.save(user);
-        }
-        return "Super good";
+        userService.save(new User("John"));
+        userService.save(new User("Marina"));
+        userService.save(new User("Tom"));
+        userService.save(new User("Kate"));
+        userService.save(new User("Tom"));
+
+        return "New users add in base";
     }
 
     // Проверка, что в базе что-то есть

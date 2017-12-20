@@ -52,8 +52,8 @@ public class UserServiceTest {
         listUsers.add(new User());
         when(repositoryMock.findByFirstName("Marina")).thenReturn(listUsers);
 
-        if (service.findByFirstName("Marina").size() != 2) throw new TestException("Wrong quantity users");
-
+        //if (service.findByFirstName("Marina").size() != 2) throw new TestException("Wrong quantity users");
+        assertEquals(service.findByFirstName("Marina").size(),2);
 
     }
 }

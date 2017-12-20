@@ -25,13 +25,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(int id) throws NotFoundException {
-
+    public void delete(Long id) throws NotFoundException {
+        repository.delete(id);
     }
 
     @Override
-    public User get(int id) throws NotFoundException {
-        return null;
+    public User findOne(Long id) throws NotFoundException {
+        return repository.findOne(id);
     }
 
     public int countDataSets(String firstName) {
