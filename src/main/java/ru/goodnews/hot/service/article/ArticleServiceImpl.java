@@ -7,6 +7,8 @@ import ru.goodnews.hot.model.User;
 import ru.goodnews.hot.repository.ArticleRepository;
 import ru.goodnews.hot.util.exception.NotFoundException;
 
+import java.util.List;
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
@@ -30,5 +32,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article findOne(Long id) throws NotFoundException {
         return repository.findOne(id);
+    }
+
+    public List<Article> findByUser_firstNameLikeIgnoreCase(String firstName) {
+        return repository.findByUser_firstNameLikeIgnoreCase(firstName);
     }
 }
